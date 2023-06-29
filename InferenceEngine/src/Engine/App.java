@@ -41,11 +41,11 @@ public class App
             case "fc":
             algorithms = new ForwardChainingMethod(kb, askStatement);
             break; 
-/*
+
             case "bc": 
-            BC.BCMethod();
+            algorithms = new BackwardChainingMethod(kb, askStatement);
             break; 
-*/ 
+
             default:
                 System.out.print("Wrong Search Method! Options: tt, fc & bc");
                 System.exit(2);

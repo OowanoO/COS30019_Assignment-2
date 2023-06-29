@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BackwardChaining extends LogicAlgorithms {
-    public BackwardChaining(KnowledgeBase kb, String q) {
+public class BackwardChainingMethod extends LogicAlgorithms {
+    public BackwardChainingMethod(KnowledgeBase kb, String q) {
         super(kb, q);
         setShortName("BC");
         setFullName("Backward Chaining");
