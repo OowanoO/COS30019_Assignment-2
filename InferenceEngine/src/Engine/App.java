@@ -38,10 +38,10 @@ public class App
             algorithms = new TruthTableMethod(kb, askStatement);
             break;
 
-            /*case "fc":
-            FC.FCMethod();
+            case "fc":
+            algorithms = new ForwardChainingMethod(kb, askStatement);
             break; 
-
+/*
             case "bc": 
             BC.BCMethod();
             break; 
