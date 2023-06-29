@@ -59,7 +59,8 @@ public class TruthTable extends LogicAlgorithm {
   }
 
   // Method to test the question and return a string output
-  public String testQuestion() {
+  public String testQuestion()
+   {
     String outputStr;
 
     // If verifyFacts return true, set outputstr to "YES" with the counter value

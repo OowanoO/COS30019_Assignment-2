@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 public class App 
 {
     public static void main(String[] args)  
@@ -51,8 +55,29 @@ public class App
             // Print out the result of testing the askStatement using the algorithm
             if (algorithms != null) 
             {
-               System.out.println("Result of " + algorithms.getFullName() + " Logic Algorithm:");
-               System.out.println(algorithms.testInput());
+                 // Create a new JFrame for displaying the result
+    JFrame resultWindow = new JFrame();
+    resultWindow.setTitle("Algorithm Results");
+    resultWindow.setSize(500, 250);
+    resultWindow.setLocationRelativeTo(null);
+    resultWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // Create a JTextArea to display the result
+    JTextArea resultTextArea = new JTextArea();
+    resultTextArea.setEditable(false);
+
+    // Append the test output to the result text area
+    resultTextArea.append(algorithms.testInput());
+
+    // Create a JScrollPane and add the result text area to it
+    JScrollPane scrollPane = new JScrollPane(resultTextArea);
+
+    // Add the scroll pane to the result window
+    resultWindow.getContentPane().add(scrollPane);
+
+    // Make the result window visible
+    resultWindow.setVisible(true);
+
             }
 
 

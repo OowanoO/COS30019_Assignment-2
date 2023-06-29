@@ -12,24 +12,24 @@ public class KnowledgeBase
     public KnowledgeBase()
     {
          hClauseList = new ArrayList<HornClause>();
-        facts = new ArrayList<String>();
+         facts = new ArrayList<String>();
     }
 
-    public KnowledgeBase(BufferedReader inputFile) 
+    public KnowledgeBase(BufferedReader reader) 
     {
         hClauseList = new ArrayList<HornClause>();
         facts = new ArrayList<String>();
 
-        readInput(inputFile);
+        readInput(reader);
     }
 
-    public void readInput(BufferedReader inputFile)
+    public void readInput(BufferedReader reader)
      {
         try
          {
-            inputFile.readLine();
+            reader.readLine();
 
-            String tellString = inputFile.readLine();
+            String tellString = reader.readLine();
 
             tellString = tellString.replaceAll("\\s", "");
 

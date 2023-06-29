@@ -3,15 +3,16 @@ package Engine;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-    
+import java.util.List;
+
 public class TruthTableMethod extends LogicAlgorithms
 {
     //variables list 
-    private ArrayList<String> varList = new ArrayList<String>();
+    private List<String> varList;
 
-    private ArrayList<HornClause> hClause;
+    private List<HornClause> hClause;
     private String ask; 
-    private ArrayList<String> factList;
+    private List<String> factList;
 
     private boolean[][] truthTable;
     private boolean[] algorithmResults;
@@ -24,8 +25,8 @@ public class TruthTableMethod extends LogicAlgorithms
     private int[] colArrayValue; 
 
     private boolean[] inferenceResults;
-    private int queryIndexVar = 0;
-    private int counter = 0; 
+    private int queryIndexVar;
+    private int counter; 
 
     public TruthTableMethod(KnowledgeBase kb, String ask)
     {
@@ -36,6 +37,7 @@ public class TruthTableMethod extends LogicAlgorithms
         this.ask = ask;
         this.hClause = kb.getHornClause();
         this.factList = kb.getFacts();
+        this.varList = new ArrayList<>();
 
         //get the list of the varibles 
         getVariableList(); 
@@ -56,6 +58,8 @@ public class TruthTableMethod extends LogicAlgorithms
         this.colFactIndices = new int[factList.size()]; 
         this.colArrayValue = new int[hClause.size()];
         this.inferenceResults = new boolean[rowNum];
+        this.queryIndexVar = 0;
+        this.counter = 0;
 
         populateTruthTable();
         getColumnIndices(); 
@@ -76,7 +80,7 @@ public class TruthTableMethod extends LogicAlgorithms
             testOutput = "No: It cannot be prove " + ask;
         }
 
-        return testOutput;
+    return testOutput;
 
     }
 
@@ -88,17 +92,17 @@ public class TruthTableMethod extends LogicAlgorithms
             {
                 if(algorithmResults[i])
                 {
-                    if(truthTable[i][queryIndexVar])
+                    if(!truthTable[i][queryIndexVar])
                     {
-                        algorithmResults[i] = true;
-                        inferenceResults[i] = true; 
+                        algorithmResults[i] = false;
+                        inferenceResults[i] = false; 
 
                         break; 
                     }
 
                     else
                     {
-                        inferenceResults[i] = false;
+                        inferenceResults[i] = true;
                     }
 
                     algorithmResults[i] = truthTable[i][colFactIndices[j]];
@@ -143,7 +147,7 @@ public class TruthTableMethod extends LogicAlgorithms
             counter++;
         }
 
-        else if (!inferenceResults[i] && algorithmResults[i])
+        if (!inferenceResults[i] && algorithmResults[i])
         {
             return false;
         }
@@ -234,5 +238,6 @@ public void getColumnIndices() {
       }
     }
   }
+  
 }
 
