@@ -14,12 +14,10 @@ public abstract class LogicAlgorithms
     }
 
     // Constructor that takes a knowledge base and a question as input
-    public LogicAlgorithms(String shortName, String fullName, KnowledgeBase knowledgeBase, String input) 
+    public LogicAlgorithms(KnowledgeBase kb, String q) 
     {
-        this.shortName = shortName;
-        this.fullName = fullName;
-        this.knowledgeBase = knowledgeBase;
-        this.input = input;
+        knowledgeBase = kb;
+        input = q;
     }
 
     // Returns the short name of the algorithm
@@ -65,9 +63,9 @@ public abstract class LogicAlgorithms
     }
 
     // Sets the input question to be tested by the algorithm
-    public void setQuestion(String inquest) 
+    public void setInput(String q) 
     {
-        input = inquest;
+        input = q;
     }
 
     // Abstract method to test a question using the algorithm
