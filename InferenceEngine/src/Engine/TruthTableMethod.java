@@ -40,7 +40,7 @@ public class TruthTableMethod extends LogicAlgorithms
         setFullName("Truth Table Algorithm");
 
         this.ask = ask;
-        this.hClause = kb.getHornClause();
+        this.hClause = kb.getHornClauses();
         this.factList = kb.getFacts();
         this.varList = new ArrayList<>();
 

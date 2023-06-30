@@ -2,10 +2,8 @@ package Engine;
 
 import java.util.ArrayList;
 
-public class ForwardChainingMethod extends LogicAlgorithms
-{
-    public ForwardChainingMethod(KnowledgeBase kb, String q)
-    {
+public class ForwardChainingMethod extends LogicAlgorithms {
+    public ForwardChainingMethod(KnowledgeBase kb, String q) {
         super(kb, q);
         setShortName("FC");
         setFullName("Forward Chaining");
@@ -15,50 +13,44 @@ public class ForwardChainingMethod extends LogicAlgorithms
     public String testInput() {
 
         // Create an agenda containing the known facts from the knowledge base
-        ArrayList<String> agenda = new ArrayList<String>(getKnowledgeBase().getFacts());
+        ArrayList<String> agenda = new ArrayList<>(getKnowledgeBase().getFacts());
 
         // Create an inferred list to keep track of facts that have already been
         // inferred
-        ArrayList<String> inferred = new ArrayList<String>();
+        ArrayList<String> inferred = new ArrayList<>();
 
         // Create a counted array to keep track of which Horn clauses have already been
         // counted
-        boolean[] counted = new boolean[getKnowledgeBase().getHornClause().size()];
+        boolean[] counted = new boolean[getKnowledgeBase().getHornClauses().size()];
 
         // While the agenda is not empty
-        while (!agenda.isEmpty()) 
-        {
+        while (!agenda.isEmpty()) {
 
             // Remove the first fact from the agenda
             String p = agenda.remove(0);
 
             // If the fact has not already been inferred
-            if (!inferred.contains(p))
-            {
+            if (!inferred.contains(p)) {
 
                 // Add the fact to the inferred list
                 inferred.add(p);
 
                 // Iterate through the Horn clauses in the knowledge base
-                for (int i = 0; i < getKnowledgeBase().getHornClause().size(); i++) 
-                {
-                    HornClause hClause = getKnowledgeBase().getHornClause().get(i);
+                for (int i = 0; i < getKnowledgeBase().getHornClauses().size(); i++) {
+                    HornClause hClause = getKnowledgeBase().getHornClauses().get(i);
 
                     // If the Horn clause has not already been counted and its literals contain the
                     // fact
-                    if (!counted[i] && hClause.getLiterals().contains(p)) 
-                    {
+                    if (!counted[i] && hClause.getLiterals().contains(p)) {
 
                         // Delete the fact from the Horn clause's literals
                         hClause.deleteLiteral(p);
 
                         // If the Horn clause has no more literals
-                        if (hClause.countLiterals() == 0) 
-                        {
+                        if (hClause.countLiterals() == 0) {
 
                             // If the inferred literal of the Horn clause matches the question being tested
-                            if (hClause.getInferred().equals(getInput())) 
-                            {
+                            if (hClause.getInferred().equals(getInput())) {
 
                                 // Add the inferred literal to the inferred list
                                 inferred.add(hClause.getInferred());
@@ -66,21 +58,17 @@ public class ForwardChainingMethod extends LogicAlgorithms
                                 // Build and return a string containing "YES" and a comma-separated list of all
                                 // literals in the inferred list
                                 StringBuilder sb = new StringBuilder();
-                                
+
                                 sb.append("YES: ");
-                                for (int j = 0; j < inferred.size(); j++) 
-                                {
+                                for (int j = 0; j < inferred.size(); j++) {
                                     sb.append(inferred.get(j));
 
-                                    if (j != inferred.size() - 1) 
-                                    {
+                                    if (j != inferred.size() - 1) {
                                         sb.append(", ");
                                     }
                                 }
                                 return sb.toString();
-                            } 
-                            else 
-                            {
+                            } else {
                                 // Add the inferred literal to the agenda for further processing
                                 agenda.add(hClause.getInferred());
                             }
@@ -92,8 +80,7 @@ public class ForwardChainingMethod extends LogicAlgorithms
             }
         }
 
-        if (inferred.contains(getInput())) 
-        {
+        if (inferred.contains(getInput())) {
             StringBuilder sb = new StringBuilder();
             sb.append("YES: ");
             for (int j = 0; j < inferred.size(); j++) {
@@ -112,17 +99,13 @@ public class ForwardChainingMethod extends LogicAlgorithms
     // Method that checks if the question being tested is already a known fact in
     // the knowledge base
     @Override
-    public boolean verifyFacts() 
-    {
-        for (String fact : getKnowledgeBase().getFacts()) 
-        {
-            if (fact.equals(getInput())) 
-            {
+    public boolean verifyFacts() {
+        for (String fact : getKnowledgeBase().getFacts()) {
+            if (fact.equals(getInput())) {
                 return true;
             }
         }
 
         return false;
-}
-
+    }
 }

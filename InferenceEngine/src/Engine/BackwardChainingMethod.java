@@ -48,7 +48,7 @@ public class BackwardChainingMethod extends LogicAlgorithms {
             return true;
         }
 
-        for (HornClause hornClause : getKnowledgeBase().getHornClause()) {
+        for (HornClause hornClause : getKnowledgeBase().getHornClauses()) {
             if (hornClause.getInferred().equals(query)) {
                 Set<String> clauseInferred = new HashSet<>(inferred);
 
