@@ -18,7 +18,8 @@ public class BackwardChainingMethod extends LogicAlgorithms {
 
         boolean result = backwardChain(getInput(), inferred, inferredList, new HashSet<>());
 
-        if (result) {
+        if (result) 
+        {
             StringBuilder sb = new StringBuilder();
             sb.append("YES: ");
             for (int i = 0; i < inferredList.size(); i++) 

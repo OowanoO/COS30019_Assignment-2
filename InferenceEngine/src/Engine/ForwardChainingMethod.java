@@ -77,7 +77,7 @@ public class ForwardChainingMethod extends LogicAlgorithms
                                         sb.append(", ");
                                     }
                                 }
-                                return sb.toString() + "/n";
+                                return sb.toString();
                             } 
                             else 
                             {
