@@ -21,14 +21,19 @@ public class BackwardChainingMethod extends LogicAlgorithms {
         if (result) {
             StringBuilder sb = new StringBuilder();
             sb.append("YES: ");
-            for (int i = 0; i < inferredList.size(); i++) {
+            for (int i = 0; i < inferredList.size(); i++) 
+            {
                 sb.append(inferredList.get(i));
-                if (i != inferredList.size() - 1) {
+                if (i != inferredList.size() - 1) 
+                {
                     sb.append(", ");
                 }
+
             }
             return sb.toString();
-        } else {
+        } 
+        else 
+        {
             return "NO: It was not possible to prove " + getInput();
         }
     }
@@ -97,4 +102,6 @@ public class BackwardChainingMethod extends LogicAlgorithms {
 
         return false;
     }
+
+    
 }

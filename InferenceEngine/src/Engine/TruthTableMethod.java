@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import java.util.List;
 
 public class TruthTableMethod extends LogicAlgorithms
@@ -74,54 +70,45 @@ public class TruthTableMethod extends LogicAlgorithms
 
     public String testInput()
     {
-        String testOutput;
+        StringBuilder testOutput = new StringBuilder();
+        StringBuilder table = new StringBuilder();
 
         if(verifyFacts())
         {
+          
+    // Append column names
+    for (int i = 0; i < varList.size(); i++) 
+    {
+        table.append(varList.get(i)).append("\t");
+    }
+        table.append("TT Result").append("\n");
 
-          // Create a new JFrame for displaying the truth table
-            JFrame tableWindow = new JFrame();
-            tableWindow.setTitle("Truth Table");
-            tableWindow.setSize(500, 250);
-            tableWindow.setLocationRelativeTo(null);
-            tableWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            // Create a JTable to display the truth table
-            JTable truthTable = new JTable(this.truthTable.length, this.truthTable[0].length);
-            
-            // Set the column names
-            for (int i = 0; i < varList.size(); i++) {
-                truthTable.getColumnModel().getColumn(i).setHeaderValue(varList.get(i));
-            }
-            
-            // Set the table values
-            for (int i = 0; i < this.truthTable.length; i++) {
-                for (int j = 0; j < this.truthTable[i].length; j++) {
-                    truthTable.setValueAt(this.truthTable[i][j], i, j);
-                }
-            }
-            
-            // Create a JScrollPane and add the truth table to it
-            JScrollPane scrollPane = new JScrollPane(truthTable);
-
-            // Add the scroll pane to the table window
-            tableWindow.getContentPane().add(scrollPane);
-
-            // Make the table window visible
-            tableWindow.setVisible(true);
-
-            testOutput = "YES: " + counter;
+    // Append table rows
+    for (int i = 0; i < rowNum; i++) 
+    {
+        for (int j = 0; j < colNums; j++) 
+        {
+            table.append(truthTable[i][j] ? "true" : "false").append("\t");
+        }
+        
+          table.append(algorithmResults[i] ? "true" : "false").append("\n");
+    }
+  
+            testOutput.append(table).append("\n\n");
+            testOutput.append("YES: ").append(counter).append("\n");
+            testOutput = highlightTrueResults(testOutput.toString());
         }
 
         else 
         {
-            testOutput = "No: It cannot be prove " + ask;
+            testOutput.append("No: It cannot be proven ").append(ask);
         }
 
-    return testOutput + truthTable;
+    return testOutput.toString();
 
     }
 
+ 
     public boolean verifyFacts()
     {
         for(int i = 0; i < rowNum; i++)
@@ -278,6 +265,21 @@ public void getColumnIndices()
       }
     }
   }
+
+  private StringBuilder highlightTrueResults(String output) {
+        StringBuilder highlightedOutput = new StringBuilder();
+
+        String[] lines = output.split("\\n");
+
+        for (String line : lines) {
+            if (line.contains("true")) {
+                line = line.replace("true", "**true**");
+            }
+            highlightedOutput.append(line).append("\n");
+        }
+
+        return highlightedOutput;
+      }
   
 }
 
