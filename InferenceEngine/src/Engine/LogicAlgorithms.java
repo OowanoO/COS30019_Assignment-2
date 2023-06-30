@@ -73,4 +73,5 @@ public abstract class LogicAlgorithms
 
     // Abstract method to verify facts using the algorithm
     abstract public boolean verifyFacts();
+
 }

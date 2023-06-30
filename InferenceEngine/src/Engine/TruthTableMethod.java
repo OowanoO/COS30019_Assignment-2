@@ -3,6 +3,11 @@ package Engine;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import java.util.List;
 
 public class TruthTableMethod extends LogicAlgorithms
@@ -49,6 +54,7 @@ public class TruthTableMethod extends LogicAlgorithms
         this.truthTable = new boolean[rowNum][colNums];
 
         this.algorithmResults = new boolean[rowNum];
+
         for(int i = 0; i < rowNum; i++)
         {
             algorithmResults[i] = true;
@@ -72,6 +78,38 @@ public class TruthTableMethod extends LogicAlgorithms
 
         if(verifyFacts())
         {
+
+          // Create a new JFrame for displaying the truth table
+            JFrame tableWindow = new JFrame();
+            tableWindow.setTitle("Truth Table");
+            tableWindow.setSize(500, 250);
+            tableWindow.setLocationRelativeTo(null);
+            tableWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            // Create a JTable to display the truth table
+            JTable truthTable = new JTable(this.truthTable.length, this.truthTable[0].length);
+            
+            // Set the column names
+            for (int i = 0; i < varList.size(); i++) {
+                truthTable.getColumnModel().getColumn(i).setHeaderValue(varList.get(i));
+            }
+            
+            // Set the table values
+            for (int i = 0; i < this.truthTable.length; i++) {
+                for (int j = 0; j < this.truthTable[i].length; j++) {
+                    truthTable.setValueAt(this.truthTable[i][j], i, j);
+                }
+            }
+            
+            // Create a JScrollPane and add the truth table to it
+            JScrollPane scrollPane = new JScrollPane(truthTable);
+
+            // Add the scroll pane to the table window
+            tableWindow.getContentPane().add(scrollPane);
+
+            // Make the table window visible
+            tableWindow.setVisible(true);
+
             testOutput = "YES: " + counter;
         }
 
@@ -80,7 +118,7 @@ public class TruthTableMethod extends LogicAlgorithms
             testOutput = "No: It cannot be prove " + ask;
         }
 
-    return testOutput;
+    return testOutput + truthTable;
 
     }
 
@@ -175,9 +213,10 @@ public void getVariableList()
 
 }
 
-public void populateTruthTable() {
+public void populateTruthTable() 
+{
 
-    // Loop through each row and column of the truth grid and set its value based on
+    // Loop through each row and column of the truth table and set its value based on
     // a bitwise operation
     for (int i = 0; i < rowNum; i++)
      {
@@ -191,7 +230,8 @@ public void populateTruthTable() {
     }
   }
 
-public void getColumnIndices() {
+public void getColumnIndices() 
+{
 
     // Loop through each fact and variable in varList
     for (int i = 0; i < factList.size(); i++) 
