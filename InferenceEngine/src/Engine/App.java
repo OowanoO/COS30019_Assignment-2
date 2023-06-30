@@ -100,11 +100,13 @@ public class App
             public void actionPerformed(ActionEvent e) 
             {                
                 resultTextArea.append(logic.testInput());
+                resultTextArea.append("/n");
             }
         });
 
         JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(new ActionListener() {
+        clearButton.addActionListener(new ActionListener() 
+        {
             public void actionPerformed(ActionEvent e) {
                 resultTextArea.setText("");
             }
