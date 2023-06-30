@@ -1,20 +1,22 @@
 package Engine;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BCMethod extends LogicAlgorithm {
-    public BCMethod(KnowledgeBase knowledgeBase, String question) {
-        super("bc", "Backward Chaining", knowledgeBase, question);
+public class BackwardChainingMethod extends LogicAlgorithms {
+    public BackwardChainingMethod(KnowledgeBase kb, String q) {
+        super(kb, q);
+        setShortName("BC");
+        setFullName("Backward Chaining");
     }
 
     @Override
-    public String testQuestion() {
+    public String testInput(){
         Set<String> inferred = new HashSet<>();
+
         ArrayList<String> inferredList = new ArrayList<>();
 
-        boolean result = backwardChain(getQuestion(), inferred, inferredList, new HashSet<>());
+        boolean result = backwardChain(getInput(), inferred, inferredList, new HashSet<>());
 
         if (result) {
             StringBuilder sb = new StringBuilder();
@@ -27,12 +29,12 @@ public class BCMethod extends LogicAlgorithm {
             }
             return sb.toString();
         } else {
-            return "NO: It was not possible to prove " + getQuestion();
+            return "NO: It was not possible to prove " + getInput();
         }
     }
 
     private boolean backwardChain(String query, Set<String> inferred, ArrayList<String> inferredList,
-                                  Set<String> processedQueries) {
+            Set<String> processedQueries) {
         if (processedQueries.contains(query)) {
             return false;
         }
@@ -46,9 +48,10 @@ public class BCMethod extends LogicAlgorithm {
             return true;
         }
 
-        for (HornClause hornClause : getKnowledgeBase().getHornClauses()) {
+        for (HornClause hornClause : getKnowledgeBase().getHornClause()) {
             if (hornClause.getInferred().equals(query)) {
                 Set<String> clauseInferred = new HashSet<>(inferred);
+
                 ArrayList<String> clauseInferredList = new ArrayList<>(inferredList);
 
                 boolean allLiteralsInferred = true;
@@ -87,11 +90,11 @@ public class BCMethod extends LogicAlgorithm {
     @Override
     public boolean verifyFacts() {
         for (String fact : getKnowledgeBase().getFacts()) {
-            if (fact.equals(getQuestion())) {
+            if (fact.equals(getInput())) {
                 return true;
             }
         }
+
         return false;
     }
 }
-

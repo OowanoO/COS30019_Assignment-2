@@ -1,39 +1,84 @@
 package Engine;
-import java.util.List;
 
-public class HornClause {
-    private List<String> literals;
-    private String inferred;
+import java.util.ArrayList;
 
-    public HornClause(List<String> literals, String inferred) {
-        this.literals = literals;
-        this.inferred = inferred;
+public class HornClause 
+{
+    private ArrayList<String> literals; // List of literals in the clause
+    private String inferred; // The inferred literal
+
+    // Constructor that takes a sentence as input and splits it into literals and inferred literal
+    public HornClause(String sentence) 
+    {
+        literals = new ArrayList<String>();
+
+        String[] splitByEntailment = sentence.split("=>");
+        String[] splitByAnd = splitByEntailment[0].split("&");
+
+        for (String literal : splitByAnd) 
+        {
+            literals.add(literal);
+        }
+
+        inferred = splitByEntailment[1];
     }
 
-    public List<String> getLiterals() {
+    // Returns the list of literals
+    public ArrayList<String> getLiterals() 
+    {
         return literals;
     }
 
-    public String getInferred() {
-        return inferred;
+    // Returns the literal at the specified index
+    public String getClausesLiteralAtIndex(int index) 
+    {
+        if (index >= 0 && index < literals.size()) 
+        {
+            return literals.get(index);
+        } 
+        else 
+        {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
-    public int countLiterals() {
+    // Returns the number of literals in the clause
+    public int countLiterals() 
+    {
         return literals.size();
     }
 
-    public void deleteLiteral(String literal) {
-    literals.remove(literal);
+    // Deletes the specified literal from the list of literals
+    public void deleteLiteral(String literal) 
+    {
+        literals.remove(literal);
     }
 
+    // Returns the inferred literal
+    public String getInferred() 
+    {
+        return inferred;
+    }
 
+    // Returns a string representation of the Horn clause
     @Override
-    public String toString() {
+    public String toString() 
+    {
         StringBuilder sb = new StringBuilder();
-        for (String literal : literals) {
-            sb.append(literal).append(" ");
+        
+        for (int i = 0; i < literals.size(); i++) 
+        {
+            if (i != 0) 
+            {
+                sb.append("^");
+            }
+
+            sb.append(literals.get(i));
         }
-        sb.append("=> ").append(inferred);
+
+        sb.append("=>");
+        sb.append(inferred);
         return sb.toString();
     }
 }
+
