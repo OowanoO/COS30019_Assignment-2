@@ -1,18 +1,19 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Instructions 
 
-## Folder Structure
+To execute the Java-based program in Windows CMD shell, follow these steps: 
 
-The workspace contains two folders by default, where:
+1. Open the Command Prompt (CMD) with normal user privilege. 
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+2. Use the cd command to navigate to the folder that contains the .exe file of the program. For example, if the .exe file is located in "C:\Users\Kang\Desktop\InferenceEngine"
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+3. Once you are in the correct folder, you can execute the program using the following command format: 
+iengine <method> <filename> 
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Replace <file> with the name or path of the file containing the test case, and <method> with the keyword of the search method you want to use. For example, tt for Truth Table Search, fc for Forward Chaining Search, bc for Backward Chaining Search. 
 
-## Dependency Management
+4. For example, if you want to test a case in a text file called "test_HornKB.txt" using the Truth Table Search, the command would be: 
+iengine.exe tt test_HornKB.txt 
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+5. Press Enter to execute the command. The program will run and provide the response or output based on the specified test case and search method. 
