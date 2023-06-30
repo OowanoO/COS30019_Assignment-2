@@ -2,75 +2,61 @@ package Engine;
 
 import java.util.ArrayList;
 
-public class HornClause 
-{
+public class HornClause {
     private ArrayList<String> literals; // List of literals in the clause
     private String inferred; // The inferred literal
 
     // Constructor that takes a sentence as input and splits it into literals and inferred literal
-    public HornClause(String sentence) 
-    {
+    public HornClause(String sentence) {
         literals = new ArrayList<String>();
 
         String[] splitByEntailment = sentence.split("=>");
-        String[] splitByAnd = splitByEntailment[0].split("&");
 
-        for (String literal : splitByAnd) 
-        {
-            literals.add(literal);
+        String[] splitByConjunction = splitByEntailment[0].split("&");
+        for (String literal : splitByConjunction) {
+            literals.add(literal.trim());
         }
 
-        inferred = splitByEntailment[1];
+        inferred = splitByEntailment[1].trim();
     }
 
     // Returns the list of literals
-    public ArrayList<String> getLiterals() 
-    {
+    public ArrayList<String> getLiterals() {
         return literals;
     }
 
     // Returns the literal at the specified index
-    public String getClausesLiteralAtIndex(int index) 
-    {
-        if (index >= 0 && index < literals.size()) 
-        {
+    public String getLiteralAtIndex(int index) {
+        if (index >= 0 && index < literals.size()) {
             return literals.get(index);
-        } 
-        else 
-        {
+        } else {
             throw new IndexOutOfBoundsException();
         }
     }
 
     // Returns the number of literals in the clause
-    public int countLiterals() 
-    {
+    public int countLiterals() {
         return literals.size();
     }
 
     // Deletes the specified literal from the list of literals
-    public void deleteLiteral(String literal) 
-    {
+    public void deleteLiteral(String literal) {
         literals.remove(literal);
     }
 
     // Returns the inferred literal
-    public String getInferred() 
-    {
+    public String getInferred() {
         return inferred;
     }
 
     // Returns a string representation of the Horn clause
     @Override
-    public String toString() 
-    {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        
-        for (int i = 0; i < literals.size(); i++) 
-        {
-            if (i != 0) 
-            {
-                sb.append("^");
+
+        for (int i = 0; i < literals.size(); i++) {
+            if (i != 0) {
+                sb.append("&");
             }
 
             sb.append(literals.get(i));
@@ -81,4 +67,3 @@ public class HornClause
         return sb.toString();
     }
 }
-

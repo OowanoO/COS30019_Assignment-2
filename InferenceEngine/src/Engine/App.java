@@ -57,15 +57,18 @@ public class App
         JButton clearButton = new JButton("Clear");
         clearButton.addActionListener(new ActionListener() 
         {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) 
+            {
                 resultTextArea.setText("");
+                resultTextArea.repaint();
             }
         });
 
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ActionListener() 
         {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) 
+            {
                 System.exit(0);
             }
         });
@@ -150,6 +153,7 @@ public class App
                             case "bc":
                                 selectedAlgorithm = new BackwardChainingMethod(kb, askStatement);
                                 break;
+
                         }
 
                         if (selectedAlgorithm != null) {
